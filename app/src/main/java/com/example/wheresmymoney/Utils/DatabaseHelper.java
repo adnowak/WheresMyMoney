@@ -1,52 +1,55 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Utils;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.Toast;
+
+import com.example.wheresmymoney.Model.Account;
+import com.example.wheresmymoney.Model.Action;
+import com.example.wheresmymoney.Model.Currency;
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
-import java.util.Date;
 
 public class DatabaseHelper extends SQLiteOpenHelper
 {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "WMMDatabase";
 
-    protected static final String CURRENCIES_TABLE_NAME = "Currencies";
-    protected static final String CURRENCIES_TABLE_COL1 = "IdC";
-    protected static final String CURRENCIES_TABLE_COL2 = "Name";
-    protected static final String CURRENCIES_TABLE_COL3 = "Tag";
-    protected static final String CURRENCIES_TABLE_COL4 = "LinkRatio";
-    protected static final String CURRENCIES_TABLE_COL5 = "PointPosition";
-    protected static final String CURRENCIES_TABLE_COL6 = "IdLink";
+    private static final String CURRENCIES_TABLE_NAME = "Currencies";
+    private static final String CURRENCIES_TABLE_COL1 = "IdC";
+    private static final String CURRENCIES_TABLE_COL2 = "Name";
+    private static final String CURRENCIES_TABLE_COL3 = "Tag";
+    private static final String CURRENCIES_TABLE_COL4 = "LinkRatio";
+    private static final String CURRENCIES_TABLE_COL5 = "PointPosition";
+    private static final String CURRENCIES_TABLE_COL6 = "IdLink";
 
-    protected static final String ACCOUNTS_TABLE_NAME = "Accounts";
-    protected static final String ACCOUNTS_TABLE_COL1 = "IdA";
-    protected static final String ACCOUNTS_TABLE_COL2 = "Name";
-    protected static final String ACCOUNTS_TABLE_COL3 = "Balance";
-    protected static final String ACCOUNTS_TABLE_COL4 = "IdC";
+    private static final String ACCOUNTS_TABLE_NAME = "Accounts";
+    private static final String ACCOUNTS_TABLE_COL1 = "IdA";
+    private static final String ACCOUNTS_TABLE_COL2 = "Name";
+    private static final String ACCOUNTS_TABLE_COL3 = "Balance";
+    private static final String ACCOUNTS_TABLE_COL4 = "IdC";
 
-    protected static final String ACTIONS_TABLE_NAME = "Actions";
-    protected static final String ACTIONS_TABLE_COL1 = "IdAc";
-    protected static final String ACTIONS_TABLE_COL2 = "Amount";
-    protected static final String ACTIONS_TABLE_COL3 = "Type";
-    protected static final String ACTIONS_TABLE_COL4 = "Date";
-    protected static final String ACTIONS_TABLE_COL5 = "IdA";
+    private static final String ACTIONS_TABLE_NAME = "Actions";
+    private static final String ACTIONS_TABLE_COL1 = "IdAc";
+    private static final String ACTIONS_TABLE_COL2 = "Amount";
+    private static final String ACTIONS_TABLE_COL3 = "Type";
+    private static final String ACTIONS_TABLE_COL4 = "Date";
+    private static final String ACTIONS_TABLE_COL5 = "IdA";
 
-    public static final String CREATE_CURRENCIES_TABLE = "create table if not exists "
+    private static final String CREATE_CURRENCIES_TABLE = "create table if not exists "
             + CURRENCIES_TABLE_NAME
             + " ( "+CURRENCIES_TABLE_COL1+" integer primary key autoincrement, "+CURRENCIES_TABLE_COL2+"  TEXT NOT NULL, "+CURRENCIES_TABLE_COL3+" TEXT NOT NULL,"+CURRENCIES_TABLE_COL4+" STRING,"+CURRENCIES_TABLE_COL5+" INTEGER,"+CURRENCIES_TABLE_COL6+" INTEGER, CONSTRAINT tag_unique UNIQUE ("+CURRENCIES_TABLE_COL3+"));";
 
-    public static final String CREATE_ACCOUNTS_TABLE = "create table if not exists "
+    private static final String CREATE_ACCOUNTS_TABLE = "create table if not exists "
             + ACCOUNTS_TABLE_NAME
             + " ( "+ACCOUNTS_TABLE_COL1+" integer primary key autoincrement, "+ACCOUNTS_TABLE_COL2+"  TEXT NOT NULL, "+ACCOUNTS_TABLE_COL3+" STRING,"+ACCOUNTS_TABLE_COL4+" INTEGER, CONSTRAINT name_unique UNIQUE ("+ACCOUNTS_TABLE_COL2+"));";
 
-    public static final String CREATE_ACTIONS_TABLE = "create table if not exists "
+    private static final String CREATE_ACTIONS_TABLE = "create table if not exists "
             + ACTIONS_TABLE_NAME
             + " ( "+ACTIONS_TABLE_COL1+" integer primary key autoincrement, "+ACTIONS_TABLE_COL2+" STRING, "+ACTIONS_TABLE_COL3+" INTEGER, "+ACTIONS_TABLE_COL4+" TEXT NOT NULL, "+ACTIONS_TABLE_COL5+" INTEGER);";
 
@@ -124,7 +127,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 action.setIdAc(cursor.getInt(0));
                 action.setAmount(new BigDecimal(cursor.getString(1)).toBigInteger());
                 action.setType(cursor.getInt(2));
-                action.setDate(new String(cursor.getString(3)));
+                action.setDate(cursor.getString(3));
 
                 int IdA = cursor.getInt(4);
                 Account actionsAccount = null;
@@ -145,9 +148,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 cursor.moveToNext();
             }
             cursor.close();
-        }
-        else
-        {
         }
 
         for(Account account : Global.getInstance().getAccountsList())
@@ -295,9 +295,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
             }
             cursor.close();
         }
-        else
-        {
-        }
 
         readActions();
     }
@@ -383,7 +380,7 @@ public class DatabaseHelper extends SQLiteOpenHelper
         return false;
     }
 
-    public void deleteSingleCurrency(Currency currency)
+    private void deleteSingleCurrency(Currency currency)
     {
         deleteCurrency(currency);
     }
@@ -447,9 +444,6 @@ public class DatabaseHelper extends SQLiteOpenHelper
                 }
             }
             cursor.close();
-        }
-        else
-        {
         }
     }
 }

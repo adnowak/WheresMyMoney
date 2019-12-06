@@ -1,8 +1,7 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.HttpRequest;
 
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -10,6 +9,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.wheresmymoney.Model.API;
+import com.example.wheresmymoney.Model.Currency;
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -24,7 +26,7 @@ public class RatesRequest implements APIRequest
     private static String requestTag;
 
     private RequestQueue requestQueue;
-    private static AppCompatActivity requestingActivity;
+    private AppCompatActivity requestingActivity;
 
     public RatesRequest()
     {
@@ -32,7 +34,7 @@ public class RatesRequest implements APIRequest
         this.requestURL = "http://data.fixer.io/api/latest?access_key=";
     }
 
-    public static synchronized AppCompatActivity getRequestingActivity() {
+    public synchronized AppCompatActivity getRequestingActivity() {
         return requestingActivity;
     }
 
@@ -75,11 +77,10 @@ public class RatesRequest implements APIRequest
                 String result = responseTemp.split("[}]")[0];
 
                 String[] currenciesRawData = result.split(",");
-                //ArrayList currenciesRawDataList = new ArrayList();
                 ArrayList<Currency> temporaryCurrenciesList = new ArrayList<>();
-                for(int i=0; i<currenciesRawData.length; i++)
+                for (String currenciesRawRecord : currenciesRawData)
                 {
-                    String[] currencyRawData = currenciesRawData[i].split(":");
+                    String[] currencyRawData = currenciesRawRecord.split(":");
                     String[] currencyTagData = currencyRawData[0].split("\"");
 
                     String tag = currencyTagData[1];
@@ -137,7 +138,7 @@ public class RatesRequest implements APIRequest
         addToRequestQueue(strReq);
     }
 
-    public RequestQueue getRequestQueue() {
+    private RequestQueue getRequestQueue() {
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(requestingActivity.getApplicationContext());
         }
@@ -150,7 +151,7 @@ public class RatesRequest implements APIRequest
         getRequestQueue().add(req);
     }
 
-    public <T> void addToRequestQueue(Request<T> req) {
+    private <T> void addToRequestQueue(Request<T> req) {
         req.setTag(requestTag);
         getRequestQueue().add(req);
     }

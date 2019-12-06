@@ -1,21 +1,7 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Model;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+import com.example.wheresmymoney.Singleton.Global;
 
-import com.example.wheresmymoney.Currency;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -25,18 +11,18 @@ public class Account
     private String name;
     private BigInteger balance;
     private ArrayList<Action> actionHistory;
-    private com.example.wheresmymoney.Currency currency;
+    private Currency currency;
 
     public Account()
     {
-        this.actionHistory = new ArrayList<Action>();
+        this.actionHistory = new ArrayList<>();
     }
 
     public Account(String name, Currency currency)
     {
         this.name = name;
         this.balance = new BigInteger("0");
-        this.actionHistory = new ArrayList<Action>();
+        this.actionHistory = new ArrayList<>();
         this.currency = currency;
     }
 
@@ -79,11 +65,6 @@ public class Account
     public void setBalance(BigInteger balance)
     {
         this.balance = balance;
-    }
-
-    public void refreshAccount()
-    {
-
     }
 
     public void setCurrency(Currency currency)

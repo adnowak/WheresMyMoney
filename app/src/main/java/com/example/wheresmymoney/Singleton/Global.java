@@ -1,8 +1,17 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Singleton;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.widget.Toast;
+
+import com.example.wheresmymoney.Activities.MainActivity;
+import com.example.wheresmymoney.HttpRequest.RatesRequest;
+import com.example.wheresmymoney.Model.API;
+import com.example.wheresmymoney.Model.Account;
+import com.example.wheresmymoney.Model.Action;
+import com.example.wheresmymoney.Model.Currency;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Utils.DatabaseHelper;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -14,7 +23,6 @@ public class Global {
     public DatabaseHelper databaseHelper;
 
     private MainActivity mainActivity;
-    private AuthenticationActivity authActivity;
     public boolean authenticated = false;
 
     private String currenciesAPIKey = "7f1e42734df9c2b398a26e895321ec20";
@@ -49,11 +57,11 @@ public class Global {
     {
         instance = new Global();
 
-        instance.currenciesList = new ArrayList<Currency>();
-        instance.accountsList = new ArrayList<Account>();
-        instance.actionsList = new ArrayList<Action>();
-        instance.apisList = new ArrayList<API>();
-        instance.themesList = new ArrayList<Integer>();
+        instance.currenciesList = new ArrayList<>();
+        instance.accountsList = new ArrayList<>();
+        instance.actionsList = new ArrayList<>();
+        instance.apisList = new ArrayList<>();
+        instance.themesList = new ArrayList<>();
         instance.themesList.add(R.style.AppTheme);
         instance.themesList.add(R.style.AppThemeDark);
         instance.recentTheme = R.style.AppTheme;
@@ -90,7 +98,7 @@ public class Global {
     public void setTheme(int themeId)
     {
         instance.recentTheme = instance.themesList.get(themeId);
-        instance.recentThemeId = new Integer(themeId);
+        instance.recentThemeId = themeId;
         instance.themeChanged = true;
     }
 
@@ -108,14 +116,6 @@ public class Global {
 
     public void setMainActivity(MainActivity mainActivity) {
         this.mainActivity = mainActivity;
-    }
-
-    public AuthenticationActivity getAuthActivity() {
-        return authActivity;
-    }
-
-    public void setAuthActivity(AuthenticationActivity authActivity) {
-        this.authActivity = authActivity;
     }
 
     public boolean isAuthenticated() {
@@ -246,7 +246,7 @@ public class Global {
         this.themeChanged = themeChanged;
     }
 
-    public void readPreferences()
+    private void readPreferences()
     {
         try
         {
@@ -262,8 +262,9 @@ public class Global {
 
             instance.recentThemeId = sharedPref.getInt("RecentTheme", 0);
             instance.recentTheme = instance.themesList.get(instance.recentThemeId);
+        } catch (Exception e) {
+            displayMessage("Cannot read shared preferences");
         }
-        catch (Exception e) {}
     }
 
     public void savePreferences()
@@ -272,7 +273,7 @@ public class Global {
         SharedPreferences.Editor editor = sharedPref.edit();
         editor.putInt("MainCurrency", instance.mainCurrency.getIdC());
         editor.putInt("RecentTheme", instance.recentThemeId);
-        editor.commit();
+        editor.apply();
     }
 
     public static BigInteger getBalance()

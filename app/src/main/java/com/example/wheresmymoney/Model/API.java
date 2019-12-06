@@ -1,10 +1,8 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Model;
 
-import android.app.Activity;
-import android.app.DownloadManager;
-import android.appwidget.AppWidgetProviderInfo;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Toast;
+
+import com.example.wheresmymoney.HttpRequest.APIRequest;
 
 import java.util.ArrayList;
 

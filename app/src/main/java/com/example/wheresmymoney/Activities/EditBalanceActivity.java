@@ -1,19 +1,15 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
-import android.app.Activity;
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import com.example.wheresmymoney.Model.Action;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
+
 import java.math.BigDecimal;
 
 public class EditBalanceActivity extends AppCompatActivity
@@ -33,7 +29,7 @@ public class EditBalanceActivity extends AppCompatActivity
 
     public void submitNewBalance(View view)
     {
-        EditText textBox = (EditText) findViewById(R.id.editBalance);
+        EditText textBox = findViewById(R.id.editBalance);
 
         try
         {

@@ -1,29 +1,16 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import com.example.wheresmymoney.Model.Action;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
+
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class ExpenseActivity extends AppCompatActivity {
     @Override
@@ -35,7 +22,7 @@ public class ExpenseActivity extends AppCompatActivity {
 
     public void submitNewExpense(View view)
     {
-        EditText textBox = (EditText) findViewById(R.id.newExpenseText);
+        EditText textBox = findViewById(R.id.newExpenseText);
 
         try
         {

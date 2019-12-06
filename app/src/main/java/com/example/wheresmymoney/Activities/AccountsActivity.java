@@ -1,20 +1,19 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.wheresmymoney.Model.Account;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.util.ArrayList;
 
@@ -35,7 +34,7 @@ public class AccountsActivity extends AppCompatActivity
         super.onResume();
         Global.getInstance().databaseHelper.readAccounts();
 
-        Button button1 = (Button) findViewById(R.id.addAccountButton);
+        Button button1 = findViewById(R.id.addAccountButton);
         final Intent intent1 = new Intent(this, AddAccountActivity.class);
         button1.setOnClickListener(new View.OnClickListener()
         {
@@ -45,16 +44,16 @@ public class AccountsActivity extends AppCompatActivity
             }
         });
 
-        ArrayList<String> accountsListData = new ArrayList<String>();
+        ArrayList<String> accountsListData = new ArrayList<>();
         for(Account account: Global.getInstance().getAccountsList())
         {
             String text = account.getCurrency().toNaturalLanguage(account.getBalance());
-            accountsListData.add(new String(account.getName()+"      "+text));
+            accountsListData.add(account.getName() + "      " + text);
         }
 
         list = findViewById(R.id.listView);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, accountsListData);
         list.setAdapter(adapter2);
         final Intent intent2 = new Intent(this, AccountActivity.class);

@@ -1,26 +1,19 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.wheresmymoney.Model.Currency;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 
 public class CurrenciesActivity extends AppCompatActivity {
@@ -37,7 +30,7 @@ public class CurrenciesActivity extends AppCompatActivity {
         super.onResume();
         Currency.sortCurrencies(Global.getInstance().getCurrenciesList());
 
-        final ArrayList<String> currenciesListData = new ArrayList<String>();
+        final ArrayList<String> currenciesListData = new ArrayList<>();
 
         for(Currency currency : Global.getInstance().getCurrenciesList())
         {
@@ -46,7 +39,7 @@ public class CurrenciesActivity extends AppCompatActivity {
 
         final ListView list = findViewById(R.id.listViewCurrencies);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, currenciesListData);
         list.setAdapter(adapter2);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()

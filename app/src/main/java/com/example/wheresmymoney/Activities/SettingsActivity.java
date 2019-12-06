@@ -1,13 +1,14 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         final ListView list = findViewById(R.id.themesListView);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, themesList);
         list.setAdapter(adapter2);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()

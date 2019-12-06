@@ -1,16 +1,21 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.wheresmymoney.Model.Account;
+import com.example.wheresmymoney.Model.Action;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.util.ArrayList;
 
@@ -40,14 +45,14 @@ public class AccountActivity extends AppCompatActivity {
             }
         }
 
-        TextView nameTextView = (TextView) findViewById(R.id.textView9);
+        TextView nameTextView = findViewById(R.id.textView9);
         nameTextView.setText(Global.getInstance().getRecentAccount().getName());
 
-        TextView balanceTextView = (TextView) findViewById(R.id.textView10);
+        TextView balanceTextView = findViewById(R.id.textView10);
         String text = Global.getInstance().getRecentAccount().getCurrency().toNaturalLanguage(Global.getInstance().getRecentAccount().getBalance());
         balanceTextView.setText(text);
 
-        ArrayList<String> transactionsListData = new ArrayList<String>();
+        ArrayList<String> transactionsListData = new ArrayList<>();
 
         for(Action transaction : Global.getInstance().getRecentAccount().getActionHistory())
         {
@@ -56,7 +61,7 @@ public class AccountActivity extends AppCompatActivity {
 
         lista1 = findViewById(R.id.listViewTransactions);
 
-        ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter2 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, transactionsListData);
         lista1.setAdapter(adapter2);
         final Intent intent = new Intent(this, ActionActivity.class);
@@ -169,7 +174,7 @@ public class AccountActivity extends AppCompatActivity {
         try
         {
             Global.getInstance().setRecentAPI(Global.getInstance().getApisList().get(1));
-            Global.getInstance().getRecentAPI().makeRequest(new Integer(Global.getInstance().getRecentAccount().getIdA()).toString(), this);
+            Global.getInstance().getRecentAPI().makeRequest(Integer.toString(Global.getInstance().getRecentAccount().getIdA()), this);
         }
         catch (Exception e)
         {

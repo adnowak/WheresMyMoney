@@ -1,8 +1,11 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Model;
+
+import android.support.annotation.NonNull;
+
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +41,7 @@ public class Currency
 
         if(amount.signum()>=0)
         {
-            String recentDigit = "";
+            String recentDigit;
 
             for(int recentPos = 1; recentPos<amountString.length(); recentPos++)
             {
@@ -73,7 +76,7 @@ public class Currency
         {
             amount = amount.abs();
 
-            String recentDigit = "";
+            String recentDigit;
 
             for(int recentPos = 1; recentPos<amountString.length(); recentPos++)
             {
@@ -109,13 +112,13 @@ public class Currency
         return result +" " + getTag();
     }
 
-    public boolean equals(Object other)
+    public boolean equals(Currency other)
     {
-        return this.toString().equals(((Currency) other).toString());
+        return this.toString().equals((other).toString());
     }
 
-    public String toString()
-    {
+    @NonNull
+    public String toString() {
         return name+", "+tag;
     }
 

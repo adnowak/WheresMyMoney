@@ -1,12 +1,13 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Model;
 
-import android.app.Activity;
+import android.support.annotation.NonNull;
+
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
 import java.util.Date;
 
-public class Action extends Activity
+public class Action
 {
     private int IdAc;
     private int type;
@@ -33,12 +34,11 @@ public class Action extends Activity
         this.type = type;
     }
 
-    public String toString()
-    {
-        String typeText="";
+    @NonNull
+    public String toString() {
+        String typeText;
 
-        switch(type)
-        {
+        switch(type) {
             case 0:
                 typeText = "Income :";
                 break;
@@ -52,10 +52,8 @@ public class Action extends Activity
 
         int index = 0;
 
-        for(Account account : Global.getInstance().getAccountsList())
-        {
-            if(account.getIdA()==this.getIdA())
-            {
+        for(Account account : Global.getInstance().getAccountsList()) {
+            if(account.getIdA()==this.getIdA()) {
                 break;
             }
             index++;

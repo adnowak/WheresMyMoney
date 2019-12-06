@@ -1,31 +1,12 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
-import android.app.KeyguardManager;
-import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.content.res.TypedArray;
-import android.hardware.fingerprint.FingerprintManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.security.KeyStore;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
 
-import javax.crypto.Cipher;
-import javax.crypto.KeyGenerator;
 public class  MainActivity extends AppCompatActivity
 {
     boolean initiated = false;

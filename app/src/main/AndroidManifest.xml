@@ -18,33 +18,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".StartActivity"></activity>
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".AddAccountActivity" />
-        <activity android:name=".CurrencyActivity" />
-        <activity android:name=".EditCurrencyActivity" />
-        <activity android:name=".AddCurrencyActivity" />
-        <activity android:name=".CurrenciesActivity" />
-        <activity android:name=".AuthenticationActivity" />
-        <activity android:name=".ActionActivity" />
-        <activity android:name=".HelperActivity" />
+        <activity android:name=".Activities.StartActivity"></activity>
+        <activity android:name=".Activities.SettingsActivity" />
+        <activity android:name=".Activities.AddAccountActivity" />
+        <activity android:name=".Activities.CurrencyActivity" />
+        <activity android:name=".Activities.EditCurrencyActivity" />
+        <activity android:name=".Activities.AddCurrencyActivity" />
+        <activity android:name=".Activities.CurrenciesActivity" />
+        <activity android:name=".Activities.ActionActivity" />
+        <activity android:name=".Activities.HelperActivity" />
         <activity
-            android:name=".AccountsActivity"
+            android:name=".Activities.AccountsActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".AccountActivity"
+            android:name=".Activities.AccountActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".EditBalanceActivity"
+            android:name=".Activities.EditBalanceActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".ExpenseActivity"
+            android:name=".Activities.ExpenseActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".IncomeActivity"
+            android:name=".Activities.IncomeActivity"
             android:configChanges="orientation|screenSize" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

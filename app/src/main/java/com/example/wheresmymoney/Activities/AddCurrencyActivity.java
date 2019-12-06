@@ -1,19 +1,17 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
-import android.content.Context;
-import android.inputmethodservice.Keyboard;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import java.lang.reflect.Method;
+import com.example.wheresmymoney.Model.Currency;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
@@ -31,13 +29,13 @@ public class AddCurrencyActivity extends AppCompatActivity {
     {
         super.onResume();
         ListView list;
-        ArrayList<String> currenciesListData = new ArrayList<String>();
+        ArrayList<String> currenciesListData = new ArrayList<>();
         for (Currency currency : Global.getInstance().getCurrenciesList()) {
             currenciesListData.add(currency.getTag());
         }
         list = findViewById(R.id.currenciesListView);
 
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, currenciesListData);
         list.setAdapter(adapter3);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,7 +69,7 @@ public class AddCurrencyActivity extends AppCompatActivity {
 
         try
         {
-            int pointPosition = new Integer(pointEdit.getText().toString());
+            int pointPosition = Integer.valueOf(pointEdit.getText().toString());
 
             if(pointPosition>=0)
             {

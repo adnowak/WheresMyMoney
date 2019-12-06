@@ -1,4 +1,4 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Model;
 
 
 import org.junit.Test;
@@ -6,7 +6,9 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class CurrencyTest
 {
@@ -24,8 +26,15 @@ public class CurrencyTest
         Currency currency2 = new Currency("Name", "N", new BigDecimal("14"), 50, new Currency());
         Currency currency3 = new Currency("Name", "N1", new BigDecimal("14"), 50, new Currency());
         Currency currency4 = new Currency("Name2", "N", new BigDecimal("14"), 50, new Currency());
-        assertEquals(true, currency1.equals(currency2));
-        assertEquals(false, currency1.equals(currency3));
-        assertEquals(false, currency1.equals(currency4));
-}
+        assertTrue(currency1.equals(currency2));
+        assertFalse(currency1.equals(currency3));
+        assertFalse(currency1.equals(currency4));
+    }
+
+    @Test
+    public void getDivisionIsCorrect() {
+        Currency currency = new Currency("A", "A", new BigDecimal("1.0"), 2, new Currency());
+
+        assertEquals("100", currency.getDivision().toString());
+    }
 }

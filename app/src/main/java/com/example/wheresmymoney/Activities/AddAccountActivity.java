@@ -1,14 +1,18 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.wheresmymoney.Model.Account;
+import com.example.wheresmymoney.Model.Currency;
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
 
 import java.util.ArrayList;
 
@@ -27,13 +31,13 @@ public class AddAccountActivity extends AppCompatActivity {
         super.onResume();
 
         ListView list;
-        ArrayList<String> currenciesListData = new ArrayList<String>();
+        ArrayList<String> currenciesListData = new ArrayList<>();
         for (Currency currency : Global.getInstance().getCurrenciesList()) {
             currenciesListData.add(currency.getTag());
         }
         list = findViewById(R.id.currencies);
 
-        ArrayAdapter<String> adapter3 = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> adapter3 = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1, currenciesListData);
         list.setAdapter(adapter3);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener()
@@ -53,7 +57,7 @@ public class AddAccountActivity extends AppCompatActivity {
             {
                 if(newAccountsCurrency!=null)
                 {
-                    if(editText.getText()!=null&&editText.getText().toString()!=""&&editText.getText().toString()!=null&&editText.getText().toString().length()>0)
+                    if (editText.getText() != null && !editText.getText().toString().equals("") && editText.getText().toString().length() > 0)
                     {
                         boolean nameExists = false;
                         for(Account account : Global.getInstance().getAccountsList())

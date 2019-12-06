@@ -1,11 +1,13 @@
-package com.example.wheresmymoney;
+package com.example.wheresmymoney.Activities;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.wheresmymoney.R;
+import com.example.wheresmymoney.Singleton.Global;
 
 public class CurrencyActivity extends AppCompatActivity
 {
@@ -34,7 +36,7 @@ public class CurrencyActivity extends AppCompatActivity
         tagTextView.setText("Tag: "+Global.getInstance().getRecentCurrency().getTag());
         linkTextView.setText("Link tag: "+Global.getInstance().getRecentCurrency().getLink().getTag());
         linkRatioTextView.setText(Global.getInstance().getRecentCurrency().getLink().getName()+" ratio: "+Global.getInstance().getRecentCurrency().getLinkRatio());
-        pointPosTextView.setText("Point position: "+(new Integer(Global.getInstance().getRecentCurrency().getPointPosition())).toString());
+        pointPosTextView.setText("Point position: " + (Integer.valueOf(Global.getInstance().getRecentCurrency().getPointPosition())).toString());
     }
 
     public void editCurrency(View view)
