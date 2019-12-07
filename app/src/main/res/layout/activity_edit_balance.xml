@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Activities.EditBalanceActivity">
+    tools:context=".activities.EditBalanceActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,11 +17,10 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
@@ -58,7 +57,7 @@
                 android:id="@+id/editBalance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:autoText="true"
+                android:hint="New balance"
                 android:ems="10"
                 android:inputType="phone"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,7 +66,6 @@
                 tools:text="Enter new balance" />
 
             <Button
-                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
